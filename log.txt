@@ -1,0 +1,92 @@
+egor@LAPTOP-2IA8PRMB:/mnt/c/WINDOWS/system32$ docker --version
+
+The command 'docker' could not be found in this WSL 2 distro.
+We recommend to activate the WSL integration in Docker Desktop settings.
+
+For details about using Docker Desktop with WSL 2, visit:
+
+https://docs.docker.com/go/wsl2/
+
+egor@LAPTOP-2IA8PRMB:/mnt/c/WINDOWS/system32$ docker --version
+Docker version 24.0.2, build cb74dfc
+egor@LAPTOP-2IA8PRMB:/mnt/c/WINDOWS/system32$ cd ~
+egor@LAPTOP-2IA8PRMB:~$ mkdir docker-homework
+egor@LAPTOP-2IA8PRMB:~$ cd docker-homework
+egor@LAPTOP-2IA8PRMB:~/docker-homework$ nano 1.sh
+egor@LAPTOP-2IA8PRMB:~/docker-homework$ nano Dockerfile
+egor@LAPTOP-2IA8PRMB:~/docker-homework$ docker build -t netology-m1:netology-m1
+ERROR: "docker buildx build" requires exactly 1 argument.
+See 'docker buildx build --help'.
+
+Usage:  docker buildx build [OPTIONS] PATH | URL | -
+
+Start a build
+egor@LAPTOP-2IA8PRMB:~/docker-homework$ docker build -t netology-m1:netology-m1 .
+ERROR: permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get "http://%2Fvar%2Frun%2Fdocker.sock/_ping": dial unix /var/run/docker.sock: connect: permission denied
+egor@LAPTOP-2IA8PRMB:~/docker-homework$ sudo docker build -t netology-ml:netology-ml .
+[sudo] password for egor:
+[+] Building 13.8s (3/3) FINISHED
+ => [internal] load build definition from Dockerfile                                                               0.1s
+ => => transferring dockerfile: 205B                                                                               0.0s
+ => [internal] load .dockerignore                                                                                  0.1s
+ => => transferring context: 2B                                                                                    0.0s
+ => ERROR [internal] load metadata for docker.io/continuumio/miniconda3:latest                                    13.6s
+------
+ > [internal] load metadata for docker.io/continuumio/miniconda3:latest:
+------
+Dockerfile:1
+--------------------
+   1 | >>> FROM continuumio/miniconda3:latest
+   2 |
+   3 |     WORKDIR /app
+--------------------
+ERROR: failed to solve: continuumio/miniconda3:latest: failed to authorize: failed to fetch anonymous token: Get "https://auth.docker.io/token?scope=repository%3Acontinuumio%2Fminiconda3%3Apull&service=registry.docker.io": dial tcp: lookup auth.docker.io on 172.17.249.49:53: read udp 172.17.249.52:58207->172.17.249.49:53: i/o timeout
+egor@LAPTOP-2IA8PRMB:~/docker-homework$ ping -c 3 google.com
+ping: google.com: Temporary failure in name resolution
+egor@LAPTOP-2IA8PRMB:~/docker-homework$ sudo nano /etc/resolv.conf
+egor@LAPTOP-2IA8PRMB:~/docker-homework$ ping -c 3 auth.docker.io
+PING auth.docker.io.cdn.cloudflare.net (104.18.43.178) 56(84) bytes of data.
+64 bytes from 104.18.43.178 (104.18.43.178): icmp_seq=1 ttl=63 time=0.789 ms
+64 bytes from 104.18.43.178 (104.18.43.178): icmp_seq=2 ttl=63 time=0.454 ms
+64 bytes from 104.18.43.178: icmp_seq=3 ttl=63 time=0.572 ms
+
+--- auth.docker.io.cdn.cloudflare.net ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2221ms
+rtt min/avg/max/mdev = 0.454/0.605/0.789/0.138 ms
+egor@LAPTOP-2IA8PRMB:~/docker-homework$ cd ~/docker-homework
+egor@LAPTOP-2IA8PRMB:~/docker-homework$ sudo docker build -t netology-ml:netology-ml .
+[+] Building 170.1s (10/10) FINISHED
+ => [internal] load build definition from Dockerfile                                                               0.0s
+ => => transferring dockerfile: 205B                                                                               0.0s
+ => [internal] load .dockerignore                                                                                  0.0s
+ => => transferring context: 2B                                                                                    0.0s
+ => [internal] load metadata for docker.io/continuumio/miniconda3:latest                                          10.0s
+ => [1/5] FROM docker.io/continuumio/miniconda3:latest@sha256:1808b31ef43e9c521cde5884ba4df9ec26d8d503a314cea787  46.2s
+ => => resolve docker.io/continuumio/miniconda3:latest@sha256:1808b31ef43e9c521cde5884ba4df9ec26d8d503a314cea7875  0.0s
+ => => sha256:6a36fb713e8ba2637dc76d6a685f5458ddff8d5a35720e76f958e369234096d6 381B / 381B                         3.1s
+ => => sha256:1808b31ef43e9c521cde5884ba4df9ec26d8d503a314cea787590f8550358a63 1.61kB / 1.61kB                     0.0s
+ => => sha256:ca590c438371363f728233c7344a8ed584a900ed696c31f1d9d9e4a0a1e0dd87 1.06kB / 1.06kB                     0.0s
+ => => sha256:5dda0b54dc8acbb66b4b9ef2c3a08ac436b054c49c026a40064efafa9cb99147 6.54kB / 6.54kB                     0.0s
+ => => sha256:e95a6c7ea7d49b37920899b023ecd0e32796c976c1748491f76cae53ba86d13a 29.79MB / 29.79MB                  10.4s
+ => => sha256:e77fa18250b18d99627fe409543bcd060a1837586f00cfc39d663efdb8a37c8a 64.92MB / 64.92MB                  10.5s
+ => => sha256:c3ff3f6c51182a847a0fb9076c70bb2169406a6bf4ee02a07434fca8052cd2f5 220.23MB / 220.23MB                32.0s
+ => => extracting sha256:e95a6c7ea7d49b37920899b023ecd0e32796c976c1748491f76cae53ba86d13a                          7.4s
+ => => extracting sha256:e77fa18250b18d99627fe409543bcd060a1837586f00cfc39d663efdb8a37c8a                         13.8s
+ => => extracting sha256:6a36fb713e8ba2637dc76d6a685f5458ddff8d5a35720e76f958e369234096d6                          0.0s
+ => => extracting sha256:c3ff3f6c51182a847a0fb9076c70bb2169406a6bf4ee02a07434fca8052cd2f5                         13.3s
+ => [internal] load build context                                                                                  0.1s
+ => => transferring context: 63B                                                                                   0.0s
+ => [2/5] WORKDIR /app                                                                                             1.6s
+ => [3/5] COPY 1.sh /app/1.sh                                                                                      0.1s
+ => [4/5] RUN chmod +x /app/1.sh                                                                                   0.4s
+ => [5/5] RUN pip install --no-cache-dir mlflow boto3 pymysql                                                    104.8s
+ => exporting to image                                                                                             6.9s
+ => => exporting layers                                                                                            6.9s
+ => => writing image sha256:531b432a09068afe4e03093b2b7c10d3d1cfa7619f0080340d84b9304a88b32e                       0.0s
+ => => naming to docker.io/library/netology-ml:netology-ml                                                         0.0s
+egor@LAPTOP-2IA8PRMB:~/docker-homework$ sudo docker run netology-ml:netology-ml
+::warning::This image is deprecated.
+
+Updates to this image will be discontinued after Miniconda version `26.7.x`. The latest Miniconda Docker images are available as `anaconda/miniconda`. For more information, visit: https://hub.docker.com/r/anaconda/miniconda
+Hello Netology
+egor@LAPTOP-2IA8PRMB:~/docker-homework$ explorer.exe .
